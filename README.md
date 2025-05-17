@@ -30,16 +30,20 @@ The application is automatically deployed with GitHub Pages from the `main` bran
 Once the workflow completes, browse to:
 
 ```
-https://<your-username>.github.io/NameDropper/
+https://ajmcclary.github.io/NameDropper/
 ```
-
-Replace `<your-username>` with your GitHub account name.
 
 ## Running tests
 
 ```bash
 npm run test
 ```
+
+## GitHub Pages deployment
+
+Pushing to `main` triggers the workflow in `.github/workflows/deploy.yml` which
+builds the Angular project and deploys the `dist/namedropper` directory using
+GitHub Pages. Ensure Pages is enabl
 
 ## Screenshots
 
