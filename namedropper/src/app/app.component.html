@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button aria-label="Settings" (click)="openSettings()">
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+  <h2>1. Sanitize</h2>
+  <app-transcript-input></app-transcript-input>
+
+  <h2>2. Copy/Paste to AI</h2>
+  <app-sanitized-view></app-sanitized-view>
+
+  <h2>3. Restore</h2>
+  <app-restore></app-restore>
+</div>
