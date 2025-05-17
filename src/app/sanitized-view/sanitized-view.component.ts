@@ -5,11 +5,20 @@ import { NameMapService } from '../core/name-map.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-sanitized-view',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, ClipboardModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    ClipboardModule,
+    MatIconModule,
+    MatTooltipModule
+  ],
   templateUrl: './sanitized-view.component.html',
   styleUrl: './sanitized-view.component.scss'
 })
@@ -25,5 +34,5 @@ export class SanitizedViewComponent {
     this.clipboard.copy(this.sanitized);
   }
 
-  }
+}
 

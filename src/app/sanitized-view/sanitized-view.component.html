@@ -1,8 +1,11 @@
 <div class="output">
   <pre>{{ sanitized }}</pre>
-  <button mat-button color="primary" (click)="copy()">Copy</button>
+  <button mat-raised-button color="primary" (click)="copy()" matTooltip="Copy sanitized text">
+    <mat-icon>content_copy</mat-icon>
+    Copy
+  </button>
 </div>
-<table mat-table [dataSource]="nameMap.mappings$ | async" class="mat-elevation-z2">
+<table mat-table [dataSource]="(nameMap.mappings$ | async) || []" class="mat-elevation-z2">
   <ng-container matColumnDef="real">
     <th mat-header-cell *matHeaderCellDef> Real Name </th>
     <td mat-cell *matCellDef="let element"> {{element.realName}} </td>

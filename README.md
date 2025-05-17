@@ -1,46 +1,45 @@
 # NameDropper
 
-NameDropper is a browser-based tool that masks every real name in a meeting transcript with unique Secret-Service-style codenames. Send the scrubbed text to any AI, paste the reply back, and it instantly restores the original names for safe, accurate summaries.
+An Angular application that helps sanitize names in meeting transcripts by replacing them with codenames.
 
-## Development setup
-
-Install Angular CLI and generate the project:
+## Development
 
 ```bash
-npm install -g @angular/cli
-ng new namedropper --style=scss --routing=false --strict
-cd namedropper
-ng add @angular/material
-```
-
-The repository already contains the generated files along with application code.
-
-## Build and run
-
-```bash
+# Install dependencies
 npm install
-ng serve
+
+# Start development server
+npm start
 ```
 
-Visit `http://localhost:4200` in your browser.
+The app will be available at `http://localhost:4200/`
 
-## Live Demo
+## Deployment
 
-The application is automatically deployed with GitHub Pages from the `main` branch.
-Once the workflow completes, browse to:
+This application is configured to automatically deploy to GitHub Pages when changes are pushed to the main branch. The deployment process:
 
-```
-https://ajmcclary.github.io/NameDropper/
-```
+1. Builds the application with production configuration
+2. Sets the correct base href for GitHub Pages (`/NameDropper/`)
+3. Deploys the built files to the `gh-pages` branch
 
-## Running tests
+### Manual Deployment
+
+If you need to deploy manually:
 
 ```bash
-npm run test
+# Build for GitHub Pages
+npm run build:gh-pages
+
+# Deploy (requires push access to the repository)
+npm run deploy
 ```
 
-## Screenshots
+The application will be available at: `https://[username].github.io/NameDropper/`
 
-![App Screenshot](docs/screenshot1.gif)
+## Features
 
-![Sanitized Output](docs/screenshot2.gif)
+- Paste participant list to define exact names for sanitization
+- Support for plain text and markdown input
+- Name to codename mapping with persistence
+- Copy sanitized output
+- Restore original names from sanitized text

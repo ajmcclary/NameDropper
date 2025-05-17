@@ -73,5 +73,8 @@
       }
     }
   },
-  "defaultProject": "namedropper"
+  "defaultProject": "namedropper",
+  "cli": {
+    "analytics": false
+  }
 }

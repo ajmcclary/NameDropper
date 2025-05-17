@@ -1,0 +1,43 @@
+<div class="input-container">
+    <div class="participants-input">
+        <textarea matInput
+            placeholder="Paste participant list (e.g. 'John Smith <john.smith@example.com>; Jane Doe <jane.doe@example.com>')"
+            [formControl]="participants" rows="3" class="participants"></textarea>
+    </div>
+
+    <mat-button-toggle-group [(ngModel)]="inputMode" aria-label="Input Mode" class="input-mode-toggle">
+        <mat-button-toggle value="text" matTooltip="Plain Text Mode">
+            <mat-icon>subject</mat-icon>
+            Text
+        </mat-button-toggle>
+        <mat-button-toggle value="markdown" matTooltip="Markdown Mode">
+            <mat-icon>code</mat-icon>
+            Markdown
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <ng-container [ngSwitch]="inputMode">
+        <div *ngSwitchCase="'text'" class="editor-container">
+            <textarea matInput placeholder="Paste transcript (supports rich text)" [formControl]="text" rows="8"
+                class="transcript" (paste)="handlePaste($event)"></textarea>
+        </div>
+        <div *ngSwitchCase="'markdown'" class="editor-container">
+            <div class="markdown-container">
+                <div class="editor">
+                    <textarea matInput placeholder="Enter markdown" [formControl]="text" rows="8" class="transcript"
+                        (paste)="handlePaste($event)"></textarea>
+                </div>
+                <div class="preview">
+                    <markdown [data]="text.value || ''" class="markdown-content"></markdown>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="actions">
+        <button mat-raised-button color="primary" (click)="sanitize()" matTooltip="Replace names with codenames">
+            <mat-icon>security</mat-icon>
+            Sanitize
+        </button>
+    </div>
+</div>

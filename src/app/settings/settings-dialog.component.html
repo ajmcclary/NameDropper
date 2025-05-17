@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>
+  <mat-icon color="primary">settings</mat-icon>
+  Settings
+</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Add Name</mat-label>
+    <input matInput [formControl]="newName" placeholder="Enter a name to protect">
+    <button mat-button matSuffix mat-icon-button aria-label="Add" (click)="add()" matTooltip="Add name to protect">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-chip-set>
+    <mat-chip *ngFor="let n of names" (removed)="remove(n)">
+      <mat-icon>person</mat-icon>
+      {{ n }}
+      <button matChipRemove matTooltip="Remove name">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-set>
+  <button mat-raised-button color="warn" (click)="reset()" matTooltip="Clear all name mappings">
+    <mat-icon>delete_forever</mat-icon>
+    Reset Mappings
+  </button>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()">
+    <mat-icon>close</mat-icon>
+    Close
+  </button>
+</mat-dialog-actions>

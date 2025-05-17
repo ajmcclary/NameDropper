@@ -21,18 +21,28 @@ export class NameMapService {
    * Replace detected names with codenames.
    */
   sanitize(text: string, names: string[]): string {
-    const mappings = this.mappingsSubject.value;
-    names.forEach(n => {
-      const existing = mappings.find(m => m.realName === n);
+    const currentMappings = this.mappingsSubject.value;
+    const newMappings = [...currentMappings];
+
+    // Process names in sorted order for consistent codename assignment
+    const sortedNames = names.sort();
+
+    sortedNames.forEach(name => {
+      const existing = newMappings.find(m => m.realName === name);
       if (!existing) {
-        const code = this.generator.getNext(mappings.map(m => m.codeName));
-        mappings.push({ realName: n, codeName: code });
+        const code = this.generator.getNext(newMappings.map(m => m.codeName));
+        newMappings.push({ realName: name, codeName: code });
       }
     });
-    this.save(mappings);
-    this.mappingsSubject.next(mappings);
-    const sanitized = this.applyMapping(text, mappings, false);
+
+    // Save and emit new mappings
+    this.save(newMappings);
+    this.mappingsSubject.next(newMappings);
+
+    // Apply mappings and emit sanitized text
+    const sanitized = this.applyMapping(text, newMappings, false);
     this.sanitizedSubject.next(sanitized);
+
     return sanitized;
   }
 
@@ -51,13 +61,25 @@ export class NameMapService {
   }
 
   private applyMapping(text: string, map: NameMapping[], reverse: boolean): string {
-    map.forEach(m => {
+    // Sort mappings by length (longest first) to handle nested names correctly
+    const sortedMap = [...map].sort((a, b) =>
+      (reverse ? b.codeName.length - a.codeName.length : b.realName.length - a.realName.length)
+    );
+
+    let result = text;
+    sortedMap.forEach(m => {
       const from = reverse ? m.codeName : m.realName;
       const to = reverse ? m.realName : m.codeName;
-      const re = new RegExp(`\\b${from}\\b`, 'g');
-      text = text.replace(re, to);
+
+      // Escape special regex characters in the search string
+      const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+      // Match whole words with various surrounding punctuation
+      const re = new RegExp(`(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\])}>,.]|$)`, 'g');
+      result = result.replace(re, `$1${to}`);
     });
-    return text;
+
+    return result;
   }
 
   private load(): NameMapping[] {
