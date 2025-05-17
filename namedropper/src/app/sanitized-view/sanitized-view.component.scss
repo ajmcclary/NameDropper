@@ -1,0 +1,12 @@
+.output {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+pre {
+  background: #f5f5f5;
+  padding: 8px;
+  flex: 1;
+  overflow: auto;
+}
