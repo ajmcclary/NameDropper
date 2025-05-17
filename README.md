@@ -24,23 +24,20 @@ ng serve
 
 Visit `http://localhost:4200` in your browser.
 
+## Live Demo
+
+The application is automatically deployed with GitHub Pages from the `main` branch.
+Once the workflow completes, browse to:
+
+```
+https://ajmcclary.github.io/NameDropper/
+```
+
 ## Running tests
 
 ```bash
 npm run test
 ```
-
-## Deployment
-
-Pushes to the `main` branch automatically build and publish the app to
-GitHub Pages using the included workflow. After your first deployment,
-the site will be available at:
-
-```
-https://YOUR_GITHUB_USERNAME.github.io/NameDropper/
-```
-
-Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username.
 
 ## Screenshots
 
