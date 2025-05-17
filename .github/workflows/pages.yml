@@ -21,19 +21,17 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+          cache-dependency-path: namedropper/package-lock.json
 
       - name: Install dependencies
+        working-directory: namedropper
         run: |
           npm install
           npm audit fix || true
 
       - name: Build Angular app
-        run: npm run build
-
-      - name: Prepare deployment
-        run: |
-          mkdir -p dist/deploy
-          cp -r dist/showcase/browser/* dist/deploy/
+        working-directory: namedropper
+        run: ng build --base-href /NameDropper/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -41,15 +39,14 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/deploy
+          path: namedropper/dist/namedropper/browser
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
