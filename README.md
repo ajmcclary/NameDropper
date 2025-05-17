@@ -24,6 +24,15 @@ ng serve
 
 Visit `http://localhost:4200` in your browser.
 
+## Live Demo
+
+The application is automatically deployed with GitHub Pages from the `main` branch.
+Once the workflow completes, browse to:
+
+```
+https://ajmcclary.github.io/NameDropper/
+```
+
 ## Running tests
 
 ```bash
@@ -34,8 +43,7 @@ npm run test
 
 Pushing to `main` triggers the workflow in `.github/workflows/deploy.yml` which
 builds the Angular project and deploys the `dist/namedropper` directory using
-GitHub Pages. Ensure Pages is enabled for the repository and uses the GitHub
-Actions deployment source.
+GitHub Pages. Ensure Pages is enabl
 
 ## Screenshots
 
