@@ -23,11 +23,11 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --configuration production --base-href /NameDropper/
+        run: npm run build:gh-pages
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist/namedropper/browser
+          folder: dist/namedropper
           clean: true
