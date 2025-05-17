@@ -39,12 +39,6 @@ https://ajmcclary.github.io/NameDropper/
 npm run test
 ```
 
-## GitHub Pages deployment
-
-Pushing to `main` triggers the workflow in `.github/workflows/deploy.yml` which
-builds the Angular project and deploys the `dist/namedropper` directory using
-GitHub Pages. Ensure Pages is enabl
-
 ## Screenshots
 
 ![App Screenshot](docs/screenshot1.gif)
