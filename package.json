@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "node server.js",
     "build": "ng build --configuration production",
     "build:gh-pages": "ng build --configuration production",
     "deploy": "npm run build:gh-pages",
@@ -23,6 +24,7 @@
     "@angular/router": "^17.3.0",
     "@types/file-saver": "^2.0.7",
     "css-loader": "^7.1.2",
+    "express": "^4.18.3",
     "file-saver": "2.0.5",
     "marked": "^9.1.6",
     "ngx-markdown": "^17.1.1",

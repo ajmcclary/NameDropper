@@ -26,7 +26,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/NameDropper/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -46,11 +46,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "namedropper:build"
+            "buildTarget": "namedropper:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "namedropper:build:production"
+              "buildTarget": "namedropper:build:production"
             }
           }
         },
@@ -68,5 +68,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

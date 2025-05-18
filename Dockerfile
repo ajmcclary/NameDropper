@@ -15,30 +15,24 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Stage 2: Serve the application using nginx
-FROM nginx:alpine
+# Stage 2: Serve the application using Node.js
+FROM node:20-alpine
 
-# Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy built Angular app from builder stage
-COPY --from=builder /app/dist/namedropper/ /usr/share/nginx/html/
+# Copy package files
+COPY package*.json ./
+COPY server.js ./
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# Install only production dependencies
+RUN npm ci --only=production
 
-# Set proper permissions
-RUN chown -R nginx:nginx /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html && \
-    chown -R nginx:nginx /var/cache/nginx && \
-    chown -R nginx:nginx /var/log/nginx && \
-    chown -R nginx:nginx /etc/nginx/conf.d && \
-    touch /var/run/nginx.pid && \
-    chown -R nginx:nginx /var/run/nginx.pid
+# Copy built application from builder stage
+COPY --from=builder /app/dist /app/dist
 
-# Switch to non-root user
-USER nginx
+# Use non-root user
+USER node
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
