@@ -1,7 +1,17 @@
-import { ApplicationConfig, importProvidersFrom, SecurityContext } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, SecurityContext, ErrorHandler } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+
+class CustomErrorHandler implements ErrorHandler {
+  handleError(error: any) {
+    console.error('An error occurred:', error);
+    // Log to console in production for debugging the deployment
+    if (error.stack) {
+      console.error('Stack trace:', error.stack);
+    }
+  }
+}
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +25,7 @@ import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: ErrorHandler, useClass: CustomErrorHandler },
     provideAnimations(),
     provideMarkdown({
       markedOptions: {

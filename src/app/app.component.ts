@@ -3,7 +3,7 @@ import { TranscriptInputComponent } from './transcript-input/transcript-input.co
 import { SanitizedViewComponent } from './sanitized-view/sanitized-view.component';
 import { RestoreComponent } from './restore/restore.component';
 import { SettingsDialogComponent } from './settings/settings-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -19,7 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
