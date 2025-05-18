@@ -22,7 +22,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy built Angular app from builder stage
-COPY --from=builder /app/dist/namedropper/browser/ /usr/share/nginx/html/
+COPY --from=builder /app/dist/namedropper/ /usr/share/nginx/html/
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
