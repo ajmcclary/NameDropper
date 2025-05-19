@@ -75,7 +75,10 @@ export class NameMapService {
       const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
       // Match whole words with various surrounding punctuation
-      const re = new RegExp(`(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\])}>,.]|$)`, 'g');
+      const re = new RegExp(
+        `(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\]})>,.]|$)`,
+        'g'
+      );
       result = result.replace(re, `$1${to}`);
     });
 
