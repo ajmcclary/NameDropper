@@ -45,4 +45,10 @@ describe('NameMapService', () => {
     const restored = service.restore('ALFA-1 met BRAVO-1.');
     expect(restored).toBe('Alice met Bob.');
   });
+
+  it('reset clears stored mappings', () => {
+    service.sanitize('Alice met Bob.', ['Alice', 'Bob']);
+    service.reset();
+    expect(localStorage.getItem('namedropper-mappings')).toBe('[]');
+  });
 });

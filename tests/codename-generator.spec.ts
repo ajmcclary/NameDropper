@@ -9,4 +9,10 @@ describe('CodenameGenerator', () => {
     }
     expect(codes.size).toBe(30);
   });
+
+  it('avoids collisions with existing codes', () => {
+    const gen = new CodenameGenerator();
+    const code = gen.getNext(['ALFA-1']);
+    expect(code).toBe('ALFA-1-1');
+  });
 });
