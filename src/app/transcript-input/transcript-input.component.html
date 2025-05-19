@@ -1,8 +1,19 @@
 <div class="input-container">
-    <div class="participants-input">
-        <textarea matInput
-            placeholder="Paste participant list (e.g. 'John Smith <john.smith@example.com>; Jane Doe <jane.doe@example.com>')"
-            [formControl]="participants" rows="3" class="participants"></textarea>
+    <div class="input-section">
+        <div class="participants-input">
+            <textarea matInput
+                placeholder="Paste participant list (e.g. 'John Smith <john.smith@example.com>; Jane Doe <jane.doe@example.com>')"
+                [formControl]="participants" rows="3" class="participants"></textarea>
+        </div>
+        <div class="instructions">
+            <h4>🧑‍🤝‍🧑 Copy Attendee Names in Microsoft Teams</h4>
+            <ol>
+                <li>Open the Teams Calendar and locate your meeting.</li>
+                <li>Click the ellipsis (…) next to the event name.</li>
+                <li>Select "Copy Attendee Names" from the dropdown.</li>
+                <li>Paste anywhere (e.g., email, document) to view the list.</li>
+            </ol>
+        </div>
     </div>
 
     <mat-button-toggle-group [(ngModel)]="inputMode" aria-label="Input Mode" class="input-mode-toggle">
@@ -17,19 +28,41 @@
     </mat-button-toggle-group>
 
     <ng-container [ngSwitch]="inputMode">
-        <div *ngSwitchCase="'text'" class="editor-container">
-            <textarea matInput placeholder="Paste transcript (supports rich text)" [formControl]="text" rows="8"
-                class="transcript" (paste)="handlePaste($event)"></textarea>
+        <div *ngSwitchCase="'text'" class="input-section">
+            <div class="editor-container">
+                <textarea matInput placeholder="Paste transcript (supports rich text)" [formControl]="text" rows="8"
+                    class="transcript" (paste)="handlePaste($event)"></textarea>
+            </div>
+            <div class="instructions">
+                <h4>📄 Copy Transcript from Meeting Recap</h4>
+                <ol>
+                    <li>Open the Teams Calendar and click on the past meeting.</li>
+                    <li>Scroll to the Recap tab.</li>
+                    <li>Under Transcript, click the "Copy" icon or highlight and right-click > Copy.</li>
+                    <li>Paste into any text editor or document.</li>
+                </ol>
+            </div>
         </div>
-        <div *ngSwitchCase="'markdown'" class="editor-container">
-            <div class="markdown-container">
-                <div class="editor">
-                    <textarea matInput placeholder="Enter markdown" [formControl]="text" rows="8" class="transcript"
-                        (paste)="handlePaste($event)"></textarea>
+        <div *ngSwitchCase="'markdown'" class="input-section">
+            <div class="editor-container">
+                <div class="markdown-container">
+                    <div class="editor">
+                        <textarea matInput placeholder="Enter markdown" [formControl]="text" rows="8" class="transcript"
+                            (paste)="handlePaste($event)"></textarea>
+                    </div>
+                    <div class="preview">
+                        <markdown [data]="text.value || ''" class="markdown-content"></markdown>
+                    </div>
                 </div>
-                <div class="preview">
-                    <markdown [data]="text.value || ''" class="markdown-content"></markdown>
-                </div>
+            </div>
+            <div class="instructions">
+                <h4>📄 Copy Transcript from Meeting Recap</h4>
+                <ol>
+                    <li>Open the Teams Calendar and click on the past meeting.</li>
+                    <li>Scroll to the Recap tab.</li>
+                    <li>Under Transcript, click the "Copy" icon or highlight and right-click > Copy.</li>
+                    <li>Paste into any text editor or document.</li>
+                </ol>
             </div>
         </div>
     </ng-container>
