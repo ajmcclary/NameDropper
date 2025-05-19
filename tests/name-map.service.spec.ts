@@ -28,6 +28,18 @@ describe('NameMapService', () => {
     expect(sanitized).toMatch(/ALFA-1 and BRAVO-1/);
   });
 
+  it('sanitizes names with punctuation and no surrounding spaces', () => {
+    const text = 'GAGoldring, Alice (DOES)1 hour.';
+    const sanitized = service.sanitize(text, ['Goldring, Alice (DOES)']);
+    expect(sanitized).toContain('GAALFA-11 hour.');
+  });
+
+  it('sanitizes names followed by numbers', () => {
+    const text = 'AJ McClary1:18:40';
+    const sanitized = service.sanitize(text, ['AJ McClary']);
+    expect(sanitized).toContain('ALFA-11:18:40');
+  });
+
   it('restores names', () => {
     service.sanitize('Alice met Bob.', ['Alice', 'Bob']);
     const restored = service.restore('ALFA-1 met BRAVO-1.');
