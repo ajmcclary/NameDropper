@@ -75,15 +75,15 @@ export class NameMapService {
       const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
       // Simple global replacement of the exact name
-      const re = new RegExp(escapedFrom, 'g');
-      result = result.replace(re, to);
+      const exactMatchRegex = new RegExp(escapedFrom, 'g');
+      result = result.replace(exactMatchRegex, to);
 
       // Match whole words with various surrounding punctuation
-      const re = new RegExp(
+      const wordBoundaryRegex = new RegExp(
         `(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\]})>,.]|$)`,
         'g'
       );
-      result = result.replace(re, `$1${to}`);
+      result = result.replace(wordBoundaryRegex, `$1${to}`);
     });
 
     return result;
