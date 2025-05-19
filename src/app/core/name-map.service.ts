@@ -74,8 +74,11 @@ export class NameMapService {
       // Escape special regex characters in the search string
       const escapedFrom = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-      // Match whole words with various surrounding punctuation
-      const re = new RegExp(`(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\])}>,.]|$)`, 'g');
+      // Match whole words with generic non-alphanumeric boundaries
+      const re = new RegExp(
+        `(^|[^A-Za-z0-9])${escapedFrom}(?=[^A-Za-z0-9]|$)`,
+        'g'
+      );
       result = result.replace(re, `$1${to}`);
     });
 

@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "outDir": "dist-test",
+    "rootDir": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@angular/core": ["./test_stubs/angular-core"],
+      "rxjs": ["./test_stubs/rxjs"]
+    },
+    "skipLibCheck": true,
+    "types": [],
+    "typeRoots": [],
+    "importHelpers": false
+  },
+  "include": [
+    "src/app/core/name-map.service.ts",
+    "tests/**/*.spec.ts",
+    "test_stubs/**/*.ts",
+    "test_stubs/**/*.d.ts"
+  ]
+}
