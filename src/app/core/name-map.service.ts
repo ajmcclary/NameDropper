@@ -77,6 +77,13 @@ export class NameMapService {
       // Simple global replacement of the exact name
       const re = new RegExp(escapedFrom, 'g');
       result = result.replace(re, to);
+
+      // Match whole words with various surrounding punctuation
+      const re = new RegExp(
+        `(^|[\\s"'([{<])${escapedFrom}(?=[\\s"'\\]})>,.]|$)`,
+        'g'
+      );
+      result = result.replace(re, `$1${to}`);
     });
 
     return result;
